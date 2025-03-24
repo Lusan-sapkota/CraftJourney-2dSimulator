@@ -1,0 +1,7 @@
+{
+  "name": "Craft Journey",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
