@@ -49,15 +49,18 @@ export class InteractionSystem {
     });
     
     // Add keyboard shortcuts for item selection (1-9)
-    this.scene.input.keyboard.on('keydown-ONE', () => this.inventory.setSelectedSlot(0));
-    this.scene.input.keyboard.on('keydown-TWO', () => this.inventory.setSelectedSlot(1));
-    this.scene.input.keyboard.on('keydown-THREE', () => this.inventory.setSelectedSlot(2));
-    this.scene.input.keyboard.on('keydown-FOUR', () => this.inventory.setSelectedSlot(3));
-    this.scene.input.keyboard.on('keydown-FIVE', () => this.inventory.setSelectedSlot(4));
-    this.scene.input.keyboard.on('keydown-SIX', () => this.inventory.setSelectedSlot(5));
-    this.scene.input.keyboard.on('keydown-SEVEN', () => this.inventory.setSelectedSlot(6));
-    this.scene.input.keyboard.on('keydown-EIGHT', () => this.inventory.setSelectedSlot(7));
-    this.scene.input.keyboard.on('keydown-NINE', () => this.inventory.setSelectedSlot(8));
+    const keyboard = this.scene.input.keyboard;
+    if (keyboard) {
+      keyboard.on('keydown-ONE', () => this.inventory.setSelectedSlot(0));
+      keyboard.on('keydown-TWO', () => this.inventory.setSelectedSlot(1));
+      keyboard.on('keydown-THREE', () => this.inventory.setSelectedSlot(2));
+      keyboard.on('keydown-FOUR', () => this.inventory.setSelectedSlot(3));
+      keyboard.on('keydown-FIVE', () => this.inventory.setSelectedSlot(4));
+      keyboard.on('keydown-SIX', () => this.inventory.setSelectedSlot(5));
+      keyboard.on('keydown-SEVEN', () => this.inventory.setSelectedSlot(6));
+      keyboard.on('keydown-EIGHT', () => this.inventory.setSelectedSlot(7));
+      keyboard.on('keydown-NINE', () => this.inventory.setSelectedSlot(8));
+    }
   }
   
   private isItemBuilding(itemId: string): boolean {
@@ -95,9 +98,10 @@ export class InteractionSystem {
       const sprites = this.chunkManager.getChunkSprites(chunkX, chunkY);
       if (sprites) {
         const objectSprite = sprites.find(sprite => 
-          sprite.x === worldX && 
-          sprite.y === worldY && 
-          (sprite.texture.key === 'tree' || sprite.texture.key === 'stone_deposit')
+          (sprite as Phaser.GameObjects.Sprite).x === worldX && 
+          (sprite as Phaser.GameObjects.Sprite).y === worldY && 
+          ((sprite as Phaser.GameObjects.Sprite).texture?.key === 'tree' || 
+           (sprite as Phaser.GameObjects.Sprite).texture?.key === 'stone_deposit')
         );
         
         if (objectSprite) {
