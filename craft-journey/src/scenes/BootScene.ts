@@ -7,8 +7,8 @@ export class BootScene extends Phaser.Scene {
 
   preload() {
     // Load essential assets
-    this.load.image('player', 'assets/player.png');
-    this.load.image('grass', 'assets/tiles/grass.png');
+    this.load.image('player', 'assets/player.webp');
+    this.load.image('grass', 'assets/tiles/grass.webp');
     this.load.image('dirt', 'assets/tiles/dirt.png');
     this.load.image('stone', 'assets/tiles/stone.png');
     this.load.image('tree', 'assets/objects/tree.png');
